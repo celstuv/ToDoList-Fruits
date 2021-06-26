@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP-Javascript</title>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script>
+      var fruits = ["Apple", "Banana", "Strawberry", "Orange"];
+
+      /*flex cennter all the elements*/
+      document.body.style.display = "flex";
+      document.body.style.flexDirection = "column";
+      document.body.style.alignItems = "center";
+      document.body.style.backgroundColor = "#f0f0f0";
+
+      /*Create a title*/
+      var titre = document.createElement("h1");
+      titre.innerHTML = "TP - Numéro 1";
+      titre.style.textAlign = "center";
+      titre.style.marginBottom = "20px";
+      document.body.appendChild(titre);
+
+      /*Create a subtitle*/
+      var titre2 = document.createElement("h2");
+      titre2.innerHTML = "Exercice :  ToDoList de Fruit";
+      titre2.style.textAlign = "center";
+      titre2.style.marginBottom = "50px";
+      document.body.appendChild(titre2);
+
+      /*Create a global container*/
+      var divContainer = document.createElement("div");
+      divContainer.id = "containerFirst";
+      divContainer.className = "container";
+      divContainer.style.width = "100%";
+      document.body.appendChild(divContainer);
+
+      var divRow = document.createElement("div");
+      divRow.className = "row d-flex justify-content-center";
+      divContainer.appendChild(divRow);
+
+      var divRow2 = document.createElement("div");
+      divRow2.className = "row d-flex justify-content-center";
+      divContainer.appendChild(divRow2);
+
+      var divCol = document.createElement("div");
+      divCol.className = "col-lg-8 col-md-6 col-sm-4";
+      divRow.appendChild(divCol);
+
+      var divCol2 = document.createElement("div");
+      divCol2.className = "col-lg-10 col-md-8 col-sm-4";
+      divRow2.appendChild(divCol2);
+
+      var form = document.createElement("div");
+      form.className = "form-outline";
+      form.style.display = "flex";
+      form.style.justifyContent = "center";
+      form.style.marginLeft = "50px";
+      form.style.marginRight = "50px";
+      form.style.padding = "10px";
+      divCol.appendChild(form);
+
+      /*Create input and button */
+      var input = document.createElement("div");
+      input.style.backgroundColor = "white";
+      input.style.width = "400px";
+      input.style.border = "0.25px solid lightgrey";
+      input.style.borderRadius = "5px";
+      input.style.marginRight = "5px";
+
+      var button = document.createElement("div");
+
+      var divInput =
+        '<input type="text" id="typeText" class="form-control" placeholder="Taper un fruit, svp" aria-describedby="button-addon1"/>';
+      var divButton =
+        '<button class="btn btn-outline-primary" type="button" id="button-addon2" data-mdb-ripple-color="dark" onclick="ajouter()">Valider</button>';
+
+      input.innerHTML = divInput;
+      button.innerHTML = divButton;
+      form.appendChild(input);
+      form.appendChild(button);
+
+      /*Create ToDoList*/
+      var divContainer2 = document.createElement("div");
+      divContainer2.className = "container";
+      divContainer2.id = "container";
+      divContainer2.style.padding = "10px";
+      divContainer2.style.textAlign = "center";
+      document.body.appendChild(divContainer2);
+
+      /*Scroll through the table and display it*/
+      fruits.forEach(function (valeur, index) {
+        var listFruit = document.createElement("p");
+        listFruit.id = "Fruit - " + valeur;
+        listFruit.style.display = "flex";
+        listFruit.style.flexDirection = "row";
+        listFruit.style.justifyContent = "space-between";
+        listFruit.style.alignItems = "center";
+        listFruit.style.border = "2px solid #407294";
+        listFruit.style.borderRadius = "5px";
+        listFruit.style.padding = "5px";
+        listFruit.innerHTML = "N° " + index + "  - fruit : " + valeur;
+        /*Delete button*/
+        var inputSuppr = document.createElement("div");
+        var divSupprBouton =
+          '<input type="button" class="btn btn-outline-danger" id="btn" value="Supprimer" onclick="supprimer(' +
+          index +
+          ')">';
+        inputSuppr.innerHTML = divSupprBouton;
+        listFruit.appendChild(inputSuppr);
+        divContainer2.appendChild(listFruit);
+      });
+
+      var msgErreur = document.createElement("p");
+      msgErreur.id = "afficher";
+      msgErreur.style.color = "red";
+      msgErreur.style.textAlign = "center";
+      divCol2.appendChild(msgErreur);
+
+      /*don't insert sapce in table*/
+      document.body.onkeyup = function (e) {
+        if (e.keyCode == 32) {
+          document.getElementById('button-addon2').disabled = true
+          msgErreur.innerHTML = "Vous ne pouvez pas remplir une valeur null dans le tableau.";
+            window.setTimeout(function () {
+              window.location.reload();
+            }, 3000);
+        }
+      };
+
+      function ajouter() {
+        var saisie = document.getElementById("typeText").value;
+        var saisieMaj = saisie.charAt(0).toUpperCase() + saisie.slice(1);
+
+        // Check existing value in the table
+        if (fruits.indexOf(saisieMaj) !== -1) {
+          alert("Ce fruit est déjà présent dans le tableau!");
+          document.getElementById("typeText").value = "";
+
+          //Insert value in the table
+        } else if (saisieMaj) {
+          fruits.push(saisieMaj);
+
+          divContainer2.innerHTML = "";
+          msgErreur.innerHTML = "";
+          document.getElementById("typeText").value = "";
+
+          fruits.forEach(function (valeur, index) {
+            var listFruit = document.createElement("p");
+            listFruit.id = "Fruit - " + valeur;
+            listFruit.style.display = "flex";
+            listFruit.style.flexDirection = "row";
+            listFruit.style.justifyContent = "space-between";
+            listFruit.style.alignItems = "center";
+            listFruit.style.border = "2px solid #407294";
+            listFruit.style.borderRadius = "5px";
+            listFruit.style.padding = "5px";
+            listFruit.innerHTML = "N° " + index + "  - fruit : " + valeur;
+
+            var inputSuppr = document.createElement("div");
+            var divSupprBouton =
+              '<input type="Button" class="btn btn-outline-danger" id="btn" value="Supprimer" onclick="supprimer(' +
+              index +
+              ')">';
+            inputSuppr.innerHTML = divSupprBouton;
+            listFruit.appendChild(inputSuppr);
+            divContainer2.appendChild(listFruit);
+          });
+          /*Try again, empty input*/
+        } else {
+          msgErreur.innerHTML = "Veuillez saisir votre fruit, svp";
+        }
+      }
+
+      function supprimer(index) {
+        //Chek the new table
+        var position2 = fruits.indexOf(fruits[index]);
+
+        //Delete process
+        if (index == position2) {
+          fruits.splice(position2, 1);
+          divContainer2.innerHTML = "";
+
+          fruits.forEach(function (valeur, index) {
+            var listFruit = document.createElement("p");
+            listFruit.id = "Fruit - " + valeur;
+            listFruit.style.display = "flex";
+            listFruit.style.flexDirection = "row";
+            listFruit.style.justifyContent = "space-between";
+            listFruit.style.alignItems = "center";
+            listFruit.style.border = "2px solid #407294";
+            listFruit.style.borderRadius = "5px";
+            listFruit.style.padding = "5px";
+            listFruit.innerHTML = "N° " + index + "  - fruit : " + valeur;
+
+            var inputSuppr = document.createElement("div");
+            inputSuppr.id = "divFruit";
+            var divSupprBouton =
+              '<input type="Button" class="btn btn-outline-danger" id="btn" value="Supprimer" onclick="supprimer(' +
+              index +
+              ')">';
+            inputSuppr.innerHTML = divSupprBouton;
+            listFruit.appendChild(inputSuppr);
+
+            divContainer2.appendChild(listFruit);
+          });
+        } else {
+          alert(
+            "Un problème est survenu , veuillez contacter l'administrateur"
+          );
+        }
+      }
+    </script>
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+    ></script>
+  </body>
+</html>
