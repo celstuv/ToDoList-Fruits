@@ -5,7 +5,7 @@ TP Javascript
 Consignes  : 
 Uniquement du jascript, ne pas utiliser de balises pour créer les élements.
 
-Afficher les champs inputs au chargement de la page
+Afficher les champs inputs au chargement de la page</br>
 Afficher le tableau au chargement de la page
 Faire l'ajout d'un fruit
 Faire la suppression d'un fruit
