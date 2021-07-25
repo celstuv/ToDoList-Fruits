@@ -20,13 +20,16 @@ Vérifier si le tableau est vide</br>
 
 Instructions: Only javascript, do not use tags to create elements.
 
-Display the input fields when the page loads
-Display the table when the page is loaded
-Add a fruit
-Delete a fruit
-Update the table when a fruit is deleted
-Check if a fruit is entered in the field otherwise error message below the input
-Check if a fruit exists in our table, if not an alert message
-Check if the table is empty
+Display the input fields when the page loads</br>
+Display the table when the page is loaded</br>
+Add a fruit</br>
+Delete a fruit</br>
+Update the table when a fruit is deleted</br>
+Check if a fruit is entered in the field otherwise error message below the input</br>
+Check if a fruit exists in our table, if not an alert message</br>
+Check if the table is empty</br>
+</br>
+</br>
+
 
 Résultat ici / view result here => https://celstuv.github.io/ToDoList-Fruits/
